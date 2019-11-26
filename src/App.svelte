@@ -44,6 +44,10 @@
           </div>
           <div class="col-8 mt-3">
             <h5>{item.product.name}</h5>
+            <p>Valor à vista:{item.product.price.value}</p>
+            <p>Parcelado em até: {item.product.price.installments}</p>
+            <p>Valor da parcela: {item.product.price.installmentValue}</p>
+
           </div>
         </div>
       </div>
