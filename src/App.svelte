@@ -27,6 +27,11 @@
     itemsPendenting = [...itemsPendenting, item];
   }
 
+  function Back() {
+    console.log("aaaa");
+    showModalCarrinho = false;
+  }
+
   // setInterval(() => {
   //   if (imageIndice === 3) {
   //     return (imageIndice = 0);
@@ -41,46 +46,48 @@
   }
 </style>
 
-<div class="container">
-  {#if name === 'Henrique'}
-    <h1>Olá {name}</h1>
-  {/if}
+{#if !showModalCarrinho}
+  <div class="container modal-background">
+    <h1>Estudo Svelte</h1>
+    <button
+      class="btn btn-success"
+      disabled={itemsPendenting == 0 ? 'true' : ''}
+      on:click={handleShowCarrinho}>
+      Carrinho
+    </button>
 
-  <h1>Estudo Svelte</h1>
-  <button
-    class="btn btn-success"
-    disabled={itemsPendenting == 0 ? 'true' : ''}
-    on:click={handleShowCarrinho}>
-    Carrinho
-  </button>
-  <ModalCarrinhoComponent show={showModalCarrinho} items={itemsPendenting} />
-
-  <div class="row">
-    {#each data as item}
-      <div class="col-12 border my-3">
-        <div class="row py-3">
-          <div class="col-4">
-            <img
-              src={item.product.images[imageIndice]}
-              alt={item.product.name}
-              class="img-fluid" />
-          </div>
-          <div class="col-8 mt-3">
-            <h5>{item.product.name}</h5>
-            <p>Valor à vista:{item.product.price.value}</p>
-            <p>Parcelado em até: {item.product.price.installments}</p>
-            <p>Valor da parcela: {item.product.price.installmentValue}</p>
-            <button
-              class="btn btn-success"
-              on:click={() => {
-                itemsPendenting = [...itemsPendenting, item.product];
-              }}>
-              Adicionar
-            </button>
+    <div class="row">
+      {#each data as item}
+        <div class="col-12 border my-3">
+          <div class="row py-3">
+            <div class="col-4">
+              <img
+                src={item.product.images[imageIndice]}
+                alt={item.product.name}
+                class="img-fluid" />
+            </div>
+            <div class="col-8 mt-3">
+              <h5>{item.product.name}</h5>
+              <p>Valor à vista:{item.product.price.value}</p>
+              <p>Parcelado em até: {item.product.price.installments}</p>
+              <p>Valor da parcela: {item.product.price.installmentValue}</p>
+              <button
+                class="btn btn-success"
+                on:click={() => {
+                  itemsPendenting = [...itemsPendenting, item.product];
+                }}>
+                Adicionar
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    {/each}
-  </div>
+      {/each}
+    </div>
 
-</div>
+  </div>
+{:else}
+  <ModalCarrinhoComponent
+    show={showModalCarrinho}
+    items={itemsPendenting}
+    handleBack={Back} />
+{/if}

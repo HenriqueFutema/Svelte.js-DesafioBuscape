@@ -1,39 +1,22 @@
 <script>
   export let show;
   export let items;
+  export let handleBack;
 </script>
 
 <style>
-  /* .modal-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-  }
 
-  .mod {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: calc(100vw - 4em);
-    max-width: 32em;
-    max-height: calc(100vh - 4em);
-    overflow: auto;
-    transform: translate(-50%, -50%);
-    padding: 1em;
-    border-radius: 0.2em;
-    background: white;
-  } */
 </style>
 
 {#if show}
-  <div class="modal-background">
-    <div class="mod">
-      {#each items as item}
-        <p>{item.name}</p>
-      {/each}
+  <div class="container mt-5">
+    <div class="jumbotron">
+      <button on:click={handleBack}>Voltar</button>
+      <div class="border">
+        {#each items as item}
+          <p>{item.name}</p>
+        {/each}
+      </div>
     </div>
   </div>
 {/if}
