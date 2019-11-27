@@ -14,30 +14,18 @@
     data = items;
   });
 
-  afterUpdate(() => {
-    console.log(itemsPendenting);
-  });
-
   function handleShowCarrinho() {
     showModalCarrinho = true;
     console.log(showModalCarrinho);
   }
 
-  function handleAddItem(item) {
-    itemsPendenting = [...itemsPendenting, item];
+  function updateData(newData) {
+    itemsPendenting = newData;
   }
 
   function Back() {
-    console.log("aaaa");
     showModalCarrinho = false;
   }
-
-  // setInterval(() => {
-  //   if (imageIndice === 3) {
-  //     return (imageIndice = 0);
-  //   }
-  //   return imageIndice++;
-  // }, 2000);
 </script>
 
 <style>
@@ -53,7 +41,7 @@
       class="btn btn-success"
       disabled={itemsPendenting == 0 ? 'true' : ''}
       on:click={handleShowCarrinho}>
-      Carrinho
+      Carrinho {itemsPendenting.length}
     </button>
 
     <div class="row">
@@ -74,7 +62,7 @@
               <button
                 class="btn btn-success"
                 on:click={() => {
-                  itemsPendenting = [...itemsPendenting, item.product];
+                  itemsPendenting = [...itemsPendenting, item];
                 }}>
                 Adicionar
               </button>
@@ -89,5 +77,6 @@
   <ModalCarrinhoComponent
     show={showModalCarrinho}
     items={itemsPendenting}
+    handleUpdateData={updateData}
     handleBack={Back} />
 {/if}
